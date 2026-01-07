@@ -1,0 +1,33 @@
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="4.0">
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>com.example.bank.filter.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/api/account</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.example.bank.servlet.UserServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/api/user</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AccountServlet</servlet-name>
+    <servlet-class>com.example.bank.servlet.AccountServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AccountServlet</servlet-name>
+    <url-pattern>/api/account</url-pattern>
+  </servlet-mapping>
+
+</web-app>

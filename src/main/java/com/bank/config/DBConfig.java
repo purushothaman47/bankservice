@@ -31,9 +31,6 @@ public class DBConfig {
             config.setPassword(props.getProperty("db.password"));
             config.setDriverClassName(props.getProperty("db.driver"));
 
-            config.setMaximumPoolSize(10);
-            config.setMinimumIdle(2);
-
             dataSource = new HikariDataSource(config);
 
         } catch (Exception e) {

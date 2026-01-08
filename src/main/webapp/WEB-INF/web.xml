@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,50 +6,73 @@
            http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>Bank Account Transaction System</display-name>
+    <display-name>Bank</display-name>
+
+    <!-- ===================== -->
+    <!-- AUTH SERVLETS -->
+    <!-- ===================== -->
+
+    <!-- Register -->
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.bank.servlet.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/auth/register</url-pattern>
+    </servlet-mapping>
+
+    <!-- Login -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.bank.servlet.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/auth/login</url-pattern>
+    </servlet-mapping>
+
+    <!-- ===================== -->
+    <!-- ACCOUNT SERVLETS -->
+    <!-- ===================== -->
 
     <servlet>
         <servlet-name>OpenAccountServlet</servlet-name>
         <servlet-class>com.bank.servlet.OpenAccountServlet</servlet-class>
     </servlet>
 
-    <servlet>
-        <servlet-name>DepositServlet</servlet-name>
-        <servlet-class>com.bank.servlet.DepositServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>WithdrawServlet</servlet-name>
-        <servlet-class>com.bank.servlet.WithdrawServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>TransactionHistoryServlet</servlet-name>
-        <servlet-class>com.bank.servlet.TransactionHistoryServlet</servlet-class>
-    </servlet>
-
-
     <servlet-mapping>
         <servlet-name>OpenAccountServlet</servlet-name>
         <url-pattern>/account/open</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DepositServlet</servlet-name>
+        <servlet-class>com.bank.servlet.DepositServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>DepositServlet</servlet-name>
         <url-pattern>/account/deposit</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>WithdrawServlet</servlet-name>
+        <servlet-class>com.bank.servlet.WithdrawServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>WithdrawServlet</servlet-name>
         <url-pattern>/account/withdraw</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>TransactionHistoryServlet</servlet-name>
-        <url-pattern>/account/transactions</url-pattern>
-    </servlet-mapping>
+    <!-- ===================== -->
+    <!-- FILTERS -->
+    <!-- ===================== -->
 
-
+    <!-- Logging Filter (SAFE) -->
     <filter>
         <filter-name>RequestLoggingFilter</filter-name>
         <filter-class>com.bank.filter.RequestLoggingFilter</filter-class>
@@ -60,38 +82,16 @@
         <filter-name>RequestLoggingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-=======
 
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="4.0">
+    <!-- Auth Filter (ONLY for account APIs) -->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.bank.filter.AuthFilter</filter-class>
+    </filter>
 
-  <filter>
-    <filter-name>AuthFilter</filter-name>
-    <filter-class>com.example.bank.filter.AuthFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthFilter</filter-name>
-    <url-pattern>/api/account</url-pattern>
-  </filter-mapping>
-
-  <servlet>
-    <servlet-name>UserServlet</servlet-name>
-    <servlet-class>com.example.bank.servlet.UserServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/api/user</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AccountServlet</servlet-name>
-    <servlet-class>com.example.bank.servlet.AccountServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AccountServlet</servlet-name>
-    <url-pattern>/api/account</url-pattern>
-  </servlet-mapping>
->>>>>>> c9189d292c301fac86df5723b3bd9e750ec318ac
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/account/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

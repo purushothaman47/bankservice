@@ -1,6 +1,8 @@
 package com.bank.servlet;
 
 import com.bank.service.AccountService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,15 +12,22 @@ import java.io.IOException;
 public class OpenAccountServlet extends HttpServlet {
 
     private final AccountService service = new AccountService();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
 
-        String name = req.getParameter("name");
-        double balance = Double.parseDouble(req.getParameter("balance"));
+        JsonNode json = mapper.readTree(req.getInputStream());
+
+        String name = json.get("name").asText();
+        double balance = json.get("balance").asDouble();
 
         service.openAccount(name, balance);
-        resp.getWriter().write("Account Created Successfully");
+
+        resp.setContentType("application/json");
+        resp.getWriter().write(
+                "{\"message\":\"Account opened successfully\"}"
+        );
     }
 }

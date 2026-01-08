@@ -20,7 +20,8 @@ public class AccountService {
 
     public void deposit(int accountId, double amount) {
         Account acc = accountDAO.findById(accountId);
-        if (acc == null) throw new InvalidAccountException("Account not found");
+        if (acc == null)
+            throw new InvalidAccountException("Account not found");
 
         double newBalance = acc.getBalance() + amount;
         accountDAO.updateBalance(accountId, newBalance);

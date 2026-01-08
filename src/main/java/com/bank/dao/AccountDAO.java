@@ -8,7 +8,7 @@ import java.sql.*;
 public class AccountDAO {
 
     public void createAccount(Account account) {
-        String sql = "INSERT INTO accounts(name, balance) VALUES (?, ?)";
+        String sql = "insert into accounts(name, balance) values (?, ?)";
 
         try (Connection con = DBConfig.getDataSource().getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -23,7 +23,7 @@ public class AccountDAO {
     }
 
     public Account findById(int id) {
-        String sql = "SELECT * FROM accounts WHERE id=?";
+        String sql = "select * from accounts where id=?";
 
         try (Connection con = DBConfig.getDataSource().getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -45,7 +45,7 @@ public class AccountDAO {
     }
 
     public void updateBalance(int id, double balance) {
-        String sql = "UPDATE accounts SET balance=? WHERE id=?";
+        String sql = "update accounts set balance=? where id=?";
 
         try (Connection con = DBConfig.getDataSource().getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -57,5 +57,9 @@ public class AccountDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void withdraw(int i, int i1) {
+
     }
 }

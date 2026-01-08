@@ -10,5 +10,4 @@ public class BankTransaction {
     private double amount;
     private LocalDateTime createdAt;
 
-    // getters & setters
 }
